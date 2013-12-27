@@ -149,9 +149,10 @@
 		t.gc.width(t.w);			//the grip's container width is updated				
 		for(var i=0; i<t.ln; i++){	//for each column
 			var c = t.c[i]; 			
-			t.g[i].css({			//height and position of the grip is updated according to the table layout
+			t.g[i].css({			//height and position of the grip is updated according to the table layout	
 				left: c.offset().left - t.offset().left + c.outerWidth(false) + t.cs / 2 + PX,
-				height: t.opt.headerOnly? t.c[0].outerHeight(false) : t.outerHeight(false)				
+				height: t.opt.headerOnly? t.c[0].outerHeight(false) : t.outerHeight(false),
+				display: c.is(":visible") ? 'block' : 'none'
 			});			
 		} 	
 	};
