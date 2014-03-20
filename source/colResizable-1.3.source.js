@@ -1,3 +1,9 @@
+/*
+ * Authors: WU Shengyuan
+ * © MISYS
+ * Subversion: 1.1
+ * 1) Fork from https://github.com/njs50/colResizable, revert "Fix onResize function to get around A is not a function error."
+ */
 /**
                _ _____           _          _     _      
               | |  __ \         (_)        | |   | |     
@@ -243,8 +249,8 @@
 	 * table layout according to the browser's size synchronizing related grips 
 	 */
 	var onResize = function(){
-		for (var ix = 0; ix < tables.length; ix++) {
-			var t = tables[ix], i, mw = 0;
+        for(t in tables){
+            var t = tables[t], i, mw=0;
 			t.removeClass(SIGNATURE);						//firefox doesnt like layout-fixed in some cases
 			if (t.w != t.width()) {							//if the the table's width has changed
 				t.w = t.width();							//its new value is kept
