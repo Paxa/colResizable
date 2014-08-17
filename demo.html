@@ -1,146 +1,142 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <title>colResizable demo</title>
 
-  <script  src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-  <!-- <script  src="./jquery.min.js"></script> -->
-  <script  src="source/colResizable-1.3.source.js"></script>
-  <script type="text/javascript">
-    $(function(){
+  <head>
+    <title>colResizable demo</title>
 
-        var onSampleResized = function (e) {
-            var columns = $(e.currentTarget).find("th");
-            var msg = "columns widths: ";
-            columns.each(function(){ msg += $(this).width() + "px; "; })
-            $("#sample2Txt").html(msg);
+    <!-- <script  src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script> -->
+    <script src="./jquery.min.js"></script>
+    <script src="source/colResizable-1.3.source.js"></script>
+    <script type="text/javascript">
+      $(function() {
+
+        var onSampleResized = function(e) {
+          var columns = $(e.currentTarget).find("th");
+          var msg = "columns widths: ";
+          columns.each(function() {
+            msg += $(this).width() + "px; ";
+          })
+          $("#sample2Txt").html(msg);
         };
 
         $("#sample2").colResizable({
-            liveDrag: true,
-            gripInnerHtml: "<div class='grip'></div>",
-            draggingClass: "dragging",
-            onResize: onSampleResized
+          postbackSafe: true,
+          liveDrag: true,
+          gripInnerHtml: "<div class='grip'></div>",
+          draggingClass: "dragging",
+          onResize: onSampleResized
         });
 
-    });
-  </script>
+      });
+    </script>
+  </head>
 
-</head>
-<body>
-    <div class="center" >
+  <body>
+    <div class="center">
 
-         <br/><br/>
+      <br/>
+      <br/>
 
-         <table id="sample2" width="100%" border="0" cellpadding="0" cellspacing="0">
-            <tr>
-                <th>header</th><th>header</th><th>header</th>
-            </tr>
-            <tr>
-                <td class="left">cell</td><td>cell</td><td class="right">cell</td>
-            </tr>
-            <tr>
-                <td class="left">cell</td><td>cell</td><td class="right">cell</td>
-            </tr>
-            <tr>
-                <td class="left bottom">cell</td><td class="bottom">cell</td><td class="bottom right">cell</td>
-            </tr>
-        </table>
+      <table id="sample2" width="100%" border="0" cellpadding="0" cellspacing="0">
+        <tr>
+          <th>header</th>
+          <th>header</th>
+          <th>header</th>
+        </tr>
+        <tr>
+          <td class="left">cell</td>
+          <td>cell</td>
+          <td class="right">cell</td>
+        </tr>
+        <tr>
+          <td class="left">cell</td>
+          <td>cell</td>
+          <td class="right">cell</td>
+        </tr>
+        <tr>
+          <td class="left bottom">cell</td>
+          <td class="bottom">cell</td>
+          <td class="bottom right">cell</td>
+        </tr>
+      </table>
 
-        <br/>
+      <br/>
 
-        <div class="sampleText">
-            <label id="sample2Txt">Drag the columns to start</label>
-        </div>
+      <div class="sampleText">
+        <label id="sample2Txt">Drag the columns to start</label>
+      </div>
 
-        <br/><br/>
+      <br/>
+      <br/>
 
     </div>
 
     <style>
-      body{
-          background-color: white;
-          text-align:center;
-          padding:55px;
+      body {
+        background-color: white;
+        text-align: center;
+        padding: 55px;
       }
-
-
-      .center{
-          text-align:left;
+      .center {
+        text-align: left;
       }
-
-      #table{
-          width:100%;
-          max-width:1600px;
+      #table {
+        width: 100%;
+        max-width: 1600px;
       }
-
       th {
         background-image: url(data:image/png;base64,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);
-         height:30px;
-         background-repeat:no-repeat;
-         color:white;
-         text-shadow: #012b4d 2px 2px 2px;
-         text-align: center;
+        height: 30px;
+        background-repeat: no-repeat;
+        color: white;
+        text-shadow: #012b4d 2px 2px 2px;
+        text-align: center;
       }
-
-      td{
-          text-indent:5px;
-          color:#444;
-          border-bottom:1px solid #bbb;
-          border-left:1px solid #bbb;
+      td {
+        text-indent: 5px;
+        color: #444;
+        border-bottom: 1px solid #bbb;
+        border-left: 1px solid #bbb;
       }
-
-      td.left{
-          border-left:1px solid #2e638e;
+      td.left {
+        border-left: 1px solid #2e638e;
       }
-
-      td.right{
-          border-right:1px solid #2e638e;
+      td.right {
+        border-right: 1px solid #2e638e;
       }
-
-      td.bottom{
-          border-bottom:1px solid #2e638e;
+      td.bottom {
+        border-bottom: 1px solid #2e638e;
       }
-
-      .grip{
-          width:20px;
-          height:30px;
-          margin-top:-3px;
-          background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAAhCAIAAAAK1l9gAAAABnRSTlMA/wD/AP83WBt9AAAEz0lEQVR4Ae2Se2xTZRjG3+/r2SzIJnSAIbOBISrhMsYkthuDaFDCRSAygw4GCWxyWbjs0jIYlJuCwiLXSVCjyTIDQkCjiRJwJl4SDYlgImxkyMSQ4bh067a267l+r9/ZKYdDpWT4DzH2yZc3T0/Pr+fXtyWyLMPt/BRChDthmiYrSiQiRULhUHeksyN44/crby+fC5Ywxowinu0yL2pMlSVJEiUxEhYlSVNZdzh4sblh0Y6V0BNKKVjyXdJ5BDQ6LypjoiqHJCksiSFZ9IdDLdfbat2rzPsFq/Ga8t2gqaDJhCkQJ3MuXflidwVYYhhXeypVYAqqKmHx2B2veauOVhtf1fTmxlNP7gcFhYgqiHHZs62lF17Za3R6x9h7AHqRVn/nnPJ3Y4z3ejf0hu246efevNxlXF/TG/ZqpH3M56VR6azCzd93qFbj3InZclsLLzl5E2KK6f10fuWEFTXZCza3ngtbjZ9157RG2niZ4MqNKaZ38fgS17KasUs2nqINVuPJY0cnXwzwkjd+VEwxvR95L3/klp3k08ZWb9UBR5oDGAPUQFMRGWF8IiXAVNncimDTi6oxhhDo7Hp+Wv7MqaM4O9vfz8GaGTIVGKdU0PgEQlTUCCUGS3tYprEI9j+dQibP1NnyrXva53WJ/WTQNFCQqowqDPikFCWNT4LIqSTQWZkgqJD6jX2au5AqweSPD21qb9OXgUCRkNzcLMl/FZC5c7LkwF+MMffEbNF/VVZUfvjLQEfXtu2epUUvGOyXA4N+MpzDPFlud0v3LYaY7XK1dvuRYfZzOdfCfk3R+Amz1Pp+ZMs7UbZ23zbHsRR7ZzLwEJw0ZmRSg66RN3pkclMbY2xi5jNCwy2JqfyAzLjxLq+PswQRP/rhsvOpIcUl2wf079+zbIUbA9P0jqh3SwKdQd8Wz/ARw6YM1BdgsjP8fdPUZhUYQ07yiYygFYzAY/UptOrNWHZx2db2uUHx0W7QkCj6somiESTAgMdYNtFIan2f7aU+g9XhoskjmhuvHNpfGQgEjN8SgPDw2cNRi3Fo7XrPkPToU63s12lhv5DBKXr7forEYpzCjSs23oP9sHqD47MUe9AOBJAQHaIcpWDcZRh/23fTCp/JRt9ZMWVM04U/D+6rDHR0gg4IHOMlxniN1zP4iYyXndGLMezJtG6/MJwA2IBSEmMsrFznjce+v7Mq7USKPdwHBIICRRsBilFjtHHjymKflb3zEWXTx53/9Y+aPWuj+yaUmA8mNNAVWrqm1PF4+rwnCcTEwp4eELqZNJQSanhTJIZxUXnZ/dmDu3Rvvm9ujDbO6Ycg4f/j1YvWx7J4dzYcPnPi0i3nbG/mwrcyF2zOLNiY+XqVc1rJ+uON+34OYvxY2UWTfB5XYZlr/lLXGxkvPgCb/mqFva6IHF9gO1KQVFswqGDJPVn4J7+27pejjdedszyZhVvHzfc5p6/yHrtU/aOIvYjJLsxbXeJamfHSA7Pp+WX22iXCkcJB84vjsXBPftkHZz757ZpzVoVzZtmyuqZ1p0LY65js0Bn/kuXegwuX34eFePziQ+cON7UPm11R+pWCcfKwWApxciMYOXeZDnSktgSCECcPjcX/YP5n0gnphHRCOiGdkE5IJ6QT0gnphHRC+m9R9VHi4xM0AgAAAABJRU5ErkJggg==);
-          margin-left:-5px;
-          position:relative;
-          z-index:88;
-          cursor:e-resize;
+      .grip {
+        width: 20px;
+        height: 30px;
+        margin-top: -3px;
+        background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAAhCAIAAAAK1l9gAAAABnRSTlMA/wD/AP83WBt9AAAEz0lEQVR4Ae2Se2xTZRjG3+/r2SzIJnSAIbOBISrhMsYkthuDaFDCRSAygw4GCWxyWbjs0jIYlJuCwiLXSVCjyTIDQkCjiRJwJl4SDYlgImxkyMSQ4bh067a267l+r9/ZKYdDpWT4DzH2yZc3T0/Pr+fXtyWyLMPt/BRChDthmiYrSiQiRULhUHeksyN44/crby+fC5Ywxowinu0yL2pMlSVJEiUxEhYlSVNZdzh4sblh0Y6V0BNKKVjyXdJ5BDQ6LypjoiqHJCksiSFZ9IdDLdfbat2rzPsFq/Ga8t2gqaDJhCkQJ3MuXflidwVYYhhXeypVYAqqKmHx2B2veauOVhtf1fTmxlNP7gcFhYgqiHHZs62lF17Za3R6x9h7AHqRVn/nnPJ3Y4z3ejf0hu246efevNxlXF/TG/ZqpH3M56VR6azCzd93qFbj3InZclsLLzl5E2KK6f10fuWEFTXZCza3ngtbjZ9157RG2niZ4MqNKaZ38fgS17KasUs2nqINVuPJY0cnXwzwkjd+VEwxvR95L3/klp3k08ZWb9UBR5oDGAPUQFMRGWF8IiXAVNncimDTi6oxhhDo7Hp+Wv7MqaM4O9vfz8GaGTIVGKdU0PgEQlTUCCUGS3tYprEI9j+dQibP1NnyrXva53WJ/WTQNFCQqowqDPikFCWNT4LIqSTQWZkgqJD6jX2au5AqweSPD21qb9OXgUCRkNzcLMl/FZC5c7LkwF+MMffEbNF/VVZUfvjLQEfXtu2epUUvGOyXA4N+MpzDPFlud0v3LYaY7XK1dvuRYfZzOdfCfk3R+Amz1Pp+ZMs7UbZ23zbHsRR7ZzLwEJw0ZmRSg66RN3pkclMbY2xi5jNCwy2JqfyAzLjxLq+PswQRP/rhsvOpIcUl2wf079+zbIUbA9P0jqh3SwKdQd8Wz/ARw6YM1BdgsjP8fdPUZhUYQ07yiYygFYzAY/UptOrNWHZx2db2uUHx0W7QkCj6somiESTAgMdYNtFIan2f7aU+g9XhoskjmhuvHNpfGQgEjN8SgPDw2cNRi3Fo7XrPkPToU63s12lhv5DBKXr7forEYpzCjSs23oP9sHqD47MUe9AOBJAQHaIcpWDcZRh/23fTCp/JRt9ZMWVM04U/D+6rDHR0gg4IHOMlxniN1zP4iYyXndGLMezJtG6/MJwA2IBSEmMsrFznjce+v7Mq7USKPdwHBIICRRsBilFjtHHjymKflb3zEWXTx53/9Y+aPWuj+yaUmA8mNNAVWrqm1PF4+rwnCcTEwp4eELqZNJQSanhTJIZxUXnZ/dmDu3Rvvm9ujDbO6Ycg4f/j1YvWx7J4dzYcPnPi0i3nbG/mwrcyF2zOLNiY+XqVc1rJ+uON+34OYvxY2UWTfB5XYZlr/lLXGxkvPgCb/mqFva6IHF9gO1KQVFswqGDJPVn4J7+27pejjdedszyZhVvHzfc5p6/yHrtU/aOIvYjJLsxbXeJamfHSA7Pp+WX22iXCkcJB84vjsXBPftkHZz757ZpzVoVzZtmyuqZ1p0LY65js0Bn/kuXegwuX34eFePziQ+cON7UPm11R+pWCcfKwWApxciMYOXeZDnSktgSCECcPjcX/YP5n0gnphHRCOiGdkE5IJ6QT0gnphHRC+m9R9VHi4xM0AgAAAABJRU5ErkJggg==);
+        margin-left: -5px;
+        position: relative;
+        z-index: 88;
+        cursor: e-resize;
       }
-
-      .grip:hover{
-          background-position-x:-20px;
+      .grip:hover {
+        background-position-x: -20px;
       }
-
-      .dragging .grip{
-          background-position-x:-40px;
+      .dragging .grip {
+        background-position-x: -40px;
       }
-
-      .sampleText{
-          position:relative;
-          width:100%;
+      .sampleText {
+        position: relative;
+        width: 100%;
       }
-
-      .dotted{
-          background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAECAYAAABCxiV9AAAAJUlEQVR4AWNkQAO84VPqgBQHEFcxAjno8ieAmBOI9cGSuABeSQCerQXl5TQa1wAAAABJRU5ErkJggg==);
-          background-repeat: repeat-y;
+      .dotted {
+        background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAECAYAAABCxiV9AAAAJUlEQVR4AWNkQAO84VPqgBQHEFcxAjno8ieAmBOI9cGSuABeSQCerQXl5TQa1wAAAABJRU5ErkJggg==);
+        background-repeat: repeat-y;
       }
-
-      input.check{
-
+      input.check {} #sample2Txt {
+        float: right;
       }
-
-      #sample2Txt{
-          float:right;
-      }
-      label{
-          color:#0361ae;
+      label {
+        color: #0361ae;
       }
     </style>
-</body>
+  </body>
 </html>
