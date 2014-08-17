@@ -105,7 +105,7 @@
         }
         table.cg = table.find("col"); //a table can also contain a colgroup with col elements
         table.ln = th.length; //table length is stored
-        if (table.p && store && store[table.id]) memento(table, th); //if 'postbackSafe' is enabled and there is data for the current table, its coloumn layout is restored
+        if (table.p) memento(table, th); //if 'postbackSafe' is enabled and there is data for the current table, its coloumn layout is restored
         th.each(function (i) { //iterate through the table column headers
             var column = $(this); //jquery wrap for the current column
             var grip = $(table.gc.append('<div class="JCLRgrip"></div>')[0].lastChild); //add the visual node to be used as grip
@@ -137,6 +137,21 @@
     };
 
 
+    var readStored = function readStored (tableId) {
+      if (store.colResizable) {
+        return JSON.parse(store.colResizable)[tableId];
+      } else {
+        return [];
+      }
+    };
+
+    var writeStored = function writeStored (tableId, data) {
+      if (!store.colResizable) store.colResizable = "{}";
+      var storedData = JSON.parse(store.colResizable);
+      storedData[tableId] = data
+      return store.colResizable = JSON.stringify(storedData);
+    };
+
     /**
      * Function to allow the persistence of columns dimensions after a browser postback. It is based in
      * the HTML5 sessionStorage object, which can be emulated for older browsers using sessionstorage.js
@@ -144,16 +159,18 @@
      * @param {jQuery ref} th - reference to the first row elements (only set in deserialization)
      */
     var memento = function (table, th) {
-        var width, m = 0,
+        if (!store) return;
+        var width, totalWidth = 0,
+            columnsWidth = [];
             i = 0,
             aux = [];
         if (th) { //in deserialization mode (after a postback)
             table.cg.removeAttr("width");
             if (table.opt.flush) {
-                store[table.id] = "";
+                writeStored(table.id, []);
                 return;
             } //if flush is activated, stored data is removed
-            width = store[table.id].split(";"); //column widths is obtained
+            width = readStored(table.id); //column widths is obtained
             for (; i < table.ln; i++) { //for each column
                 aux.push(100 * width[i] / width[table.ln] + "%"); //width is stored in an array since it will be required again a couple of lines ahead
                 th.eq(i).css("width", aux[i]); //each column width in % is resotred
@@ -162,13 +179,12 @@
               table.cg.eq(i).css("width", aux[i]); //this code is required in order to create an inline CSS rule with higher precedence than an existing CSS class in the "col" elements
             }
         } else { //in serialization mode (after resizing a column)
-            store[table.id] = ""; //clean up previous data
             for (; i < table.c.length; i++) { //iterate through columns
-                width = table.c[i].width(); //width is obtained
-                store[table.id] += width + ";"; //width is appended to the sessionStorage object using ID as key
-                m += width; //carriage is updated to obtain the full size used by columns
+                columnsWidth.push(table.c[i].width());
+                totalWidth += columnsWidth[i];
             }
-            store[table.id] += m; //the last item of the serialized string is the table's active area (width),
+            columnsWidth.push(totalWidth);
+            writeStored(table.id, columnsWidth);
             //to be able to obtain % width value of each columns while deserializing
         }
     };
@@ -266,7 +282,7 @@
                 cb(event);
             } //if there is a callback function, it is fired
         }
-        if (table.p && store) memento(table); //if postbackSafe is enabled and there is sessionStorage support, the new layout is serialized and stored
+        if (table.p) memento(table); //if postbackSafe is enabled and there is sessionStorage support, the new layout is serialized and stored
         drag = null; //since the grip's dragging is over
     };
 
